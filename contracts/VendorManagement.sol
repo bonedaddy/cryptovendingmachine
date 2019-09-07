@@ -1,4 +1,5 @@
 pragma solidity ^0.5.10;
+pragma experimental ABIEncoderV2;
 
 /// @title VendorManagement - Allows vendor product management
 contract VendorManagement {
@@ -6,25 +7,25 @@ contract VendorManagement {
     bytes32 public id;
 
     struct Product {
-        bytes32 name;
+        string name;
         uint256 cost;
     }
 
-    mapping(bytes32 => Product) public products;
+    mapping(string => Product) public products;
     // k1 = product
     // k2 = vending machine
-    mapping(bytes32 => mapping(bytes32 => bool)) public soldAt;
+    mapping(string => mapping(string => bool)) public soldAt;
 
-    event ProductRegistered(bytes32 _name, bytes32[] _locations, uint256 _cost);
-    event ProductLocationAdded(bytes32 _name, bytes32 _location);
-    event ProductLocationRemoved(bytes32 _name, bytes32 _location);
+    event ProductRegistered(string _name, string[] _locations, uint256 _cost);
+    event ProductLocationAdded(string _name, string _location);
+    event ProductLocationRemoved(string _name, string _location);
 
     constructor() public {
         id = keccak256(abi.encodePacked(msg.sender));
         owner = msg.sender;
     }
 
-    function registerProduct(bytes32 _name, bytes32[] memory _locations, uint256 _cost) public returns (bool) {
+    function registerProduct(string memory _name, string[] memory _locations, uint256 _cost) public returns (bool) {
         require(onlyVendor(), "caller must be vendored");
         // assign initial product name
         products[_name] = Product({name: _name, cost: _cost});
@@ -35,14 +36,14 @@ contract VendorManagement {
         return true;
     }
 
-    function addProductLocation(bytes32 _name, bytes32 _location) public returns (bool) {
+    function addProductLocation(string memory _name, string memory _location) public returns (bool) {
         require(onlyVendor(), "caller must be vendored");
         soldAt[_name][_location] = true;
         emit ProductLocationAdded(_name, _location);
         return true;
     }
 
-    function removeProductLocation(bytes32 _name, bytes32 _location) public returns (bool) {
+    function removeProductLocation(string memory _name, string memory _location) public returns (bool) {
         require(onlyVendor(), "caller must be vendored");
         delete(soldAt[_name][_location]);
         emit ProductLocationRemoved(_name, _location);

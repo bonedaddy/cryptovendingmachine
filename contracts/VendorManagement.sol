@@ -1,4 +1,4 @@
-pragma solidity 0.5.10;
+pragma solidity ^0.5.10;
 
 /// @title VendorManagement - Allows vendor product management
 contract VendorManagement {

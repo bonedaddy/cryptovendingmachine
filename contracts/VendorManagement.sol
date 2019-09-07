@@ -10,7 +10,7 @@ contract VendorManagement {
         string name;
         uint256 cost;
     }
-
+ 
     mapping(string => Product) public products;
     // k1 = product
     // k2 = vending machine
@@ -19,6 +19,11 @@ contract VendorManagement {
     event ProductRegistered(string _name, string[] _locations, uint256 _cost);
     event ProductLocationAdded(string _name, string _location);
     event ProductLocationRemoved(string _name, string _location);
+
+    function() external payable {
+        // convert unpayable address to payable
+        address(uint160(owner)).transfer(msg.value);
+    }
 
     constructor() public {
         // we use tx.origin because this is being deployed from factory

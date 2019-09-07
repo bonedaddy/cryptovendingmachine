@@ -3,7 +3,6 @@ pragma solidity ^0.5.10;
 /// @title VendorManagement - Allows vendor product management
 contract VendorManagement {
 
-
     enum State { NIL, REGISTERED }
 
     // Vendor allows vendor management
@@ -25,6 +24,7 @@ contract VendorManagement {
     mapping(bytes32 => Products) internal products;
 
     event VendorRegistered(bytes32 _id, address _vendor);
+    event ProductRegistered(bytes32 _name, bytes32[] _locations);
 
     function registerVendor() public returns (bool) {
         bytes32 id = getVendorID();
@@ -79,7 +79,7 @@ contract VendorManagement {
         }
         return false;
     }
-    
+
     function getVendorID() internal view returns (bytes32) {
         return keccak256(abi.encodePacked(msg.sender));
     }

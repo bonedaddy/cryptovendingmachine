@@ -12,6 +12,7 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/crypto"
 
+	bindingsm "github.com/postables/cryptovendingmachine/bindings/vendingMachine"
 	bindingsf "github.com/postables/cryptovendingmachine/bindings/vendorFactory"
 	bindingsvm "github.com/postables/cryptovendingmachine/bindings/vendorManagement"
 )
@@ -145,6 +146,24 @@ func DeployVendorFactory(
 	return contract, addr
 }
 
+// DeployVendingMachine is used to deploy the vending machine contract
+func DeployVendingMachine(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+) (*bindingsm.Vendingmachine, common.Address) {
+	addr, tx, contract, err := bindingsm.DeployVendingmachine(auth, sim)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		t.Fatal(err)
+	}
+	printGasUsed(t, sim, tx.Hash(), "vending-machine")
+	return contract, addr
+}
+
 // NewVendor is used to deploy a vendor management contract through the factory
 func NewVendor(
 	t *testing.T,
@@ -153,6 +172,25 @@ func NewVendor(
 	contract *bindingsf.Vendorfactory,
 ) error {
 	tx, err := contract.NewVendor(auth)
+	if err != nil {
+		return err
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		return err
+	}
+	return nil
+}
+
+// AddVendor is used to add a vendor to a vending machine
+func AddVendor(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+	contract *bindingsm.Vendingmachine,
+	contractAddress common.Address,
+) error {
+	tx, err := contract.AddVendor(auth, contractAddress)
 	if err != nil {
 		return err
 	}

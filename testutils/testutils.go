@@ -152,7 +152,7 @@ func DeployVendingMachine(
 	sim *backends.SimulatedBackend,
 	auth *bind.TransactOpts,
 ) (*bindingsm.Vendingmachine, common.Address) {
-	addr, tx, contract, err := bindingsm.DeployVendingmachine(auth, sim)
+	addr, tx, contract, err := bindingsm.DeployVendingmachine(auth, sim, "da hood", auth.From)
 	if err != nil {
 		t.Fatal(err)
 	}

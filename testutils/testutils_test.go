@@ -251,6 +251,20 @@ func Test_VendingMachine(t *testing.T) {
 	if _, err := bindingsm.NewVendingmachine(addr, sim); err != nil {
 		t.Fatal(err)
 	}
+	location, err := contract.Location(nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if location != "da hood" {
+		t.Fatal("bad location recovered")
+	}
+	backend, err := contract.Backend(nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if backend != auth.From {
+		t.Fatal("bad backend address recovered")
+	}
 	// test registration
 	if err := AddVendor(t, sim, auth, contract, managementAddr); err != nil {
 		t.Fatal(err)

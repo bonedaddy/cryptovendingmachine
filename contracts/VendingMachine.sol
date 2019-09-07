@@ -7,9 +7,17 @@ import "./Interfaces/VendorManagementI.sol";
 contract VendingMachine {
     using SafeMath for uint256;
 
+    string public location;
+    address public backend;
+
     // vendors selling items through the machine
     mapping(address => bool) public vendors;
     mapping(address => address) public vendorContracts;
+
+    constructor(string memory _location, address _backend) public {
+        location = _location;
+        backend = _backend;
+    }
 
     function addVendor(address _vendorContract) public returns (bool) {
         require(!vendors[msg.sender], "vendor must not be registered");

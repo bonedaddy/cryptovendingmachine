@@ -1,3 +1,6 @@
+.PHONY: all
+all: compile bindings
+
 .PHONY: compile
 compile:
 	solc \

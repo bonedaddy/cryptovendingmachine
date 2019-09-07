@@ -2,86 +2,53 @@ pragma solidity ^0.5.10;
 
 /// @title VendorManagement - Allows vendor product management
 contract VendorManagement {
-
-    enum State { NIL, REGISTERED }
-
-    // Vendor allows vendor management
-    struct Vendor {
-        address owner;
-        State state;
-    }
+    address public owner;
+    bytes32 public id;
 
     struct Product {
         bytes32 name;
-        mapping(bytes32 => bool) soldAt;
+        uint256 cost;
     }
 
-    struct Products {
-        mapping(bytes32 => Product) index;
-    }
+    mapping(bytes32 => Product) public products;
+    // k1 = product
+    // k2 = vending machine
+    mapping(bytes32 => mapping(bytes32 => bool)) public soldAt;
 
-    mapping(bytes32 => Vendor) public vendors;
-    mapping(bytes32 => Products) internal products;
-
-    event VendorRegistered(bytes32 _id, address _vendor);
     event ProductRegistered(bytes32 _name, bytes32[] _locations);
 
-    function registerVendor() public returns (bool) {
-        bytes32 id = getVendorID();
-        require(notRegistered(id), "vendor must not be reigstered");
-        vendors[id] = Vendor({
-            owner: msg.sender,
-            state: State.REGISTERED
-        });
-        emit VendorRegistered(id, msg.sender);
-        return true;
+
+    constructor() public {
+        id = keccak256(abi.encodePacked(msg.sender));
     }
 
-    function registerProduct(bytes32 _name, bytes32[] memory _locations) public returns (bool) {
-        // get vendor id
-        bytes32 id = getVendorID();
-        // validate vendor is registered
-        require(isRegistered(id), "vendor must be registered");
+    function registerProduct(bytes32 _name, bytes32[] memory _locations, uint256 _cost) public returns (bool) {
+        require(onlyVendor(), "caller must be vendored");
         // assign initial product name
-        products[id].index[_name] = Product({name: _name});
+        products[_name] = Product({name: _name, cost: _cost});
         for (uint256 i = 0; i < _locations.length; i++) {
-            products[id].index[_name].soldAt[_locations[i]] = true;
+            soldAt[_name][_locations[i]] = true;
         }
         return true;
     }
 
     function addProductLocation(bytes32 _name, bytes32 _location) public returns (bool) {
-        bytes32 id = getVendorID();
-        require(isRegistered(id), "vendor must be registered");
-        products[id].index[_name].soldAt[_location] = true;
+        require(onlyVendor(), "caller must be vendored");
+        soldAt[_name][_location] = true;
         return true;
     }
 
     function removeProductLocation(bytes32 _name, bytes32 _location) public returns (bool) {
-        bytes32 id = getVendorID();
-        require(isRegistered(id), "vendor must be registered");
-        products[id].index[_name].soldAt[_location] = false;
+        require(onlyVendor(), "caller must be vendored");
+        soldAt[_name][_location] = true;
         return true;
     }
 
     // INTERNAL VIEW FUNCTIONS
-
-    function notRegistered(bytes32 _id) internal view returns (bool) {
-        if (vendors[_id].state == State.NIL) {
+    function onlyVendor() internal view returns (bool) {
+        if (msg.sender == owner) {
             return true;
         }
         return false;
     }
-
-    function isRegistered(bytes32 _id) internal view returns (bool) {
-        if (vendors[_id].state == State.REGISTERED) {
-            return true;
-        }
-        return false;
-    }
-
-    function getVendorID() internal view returns (bytes32) {
-        return keccak256(abi.encodePacked(msg.sender));
-    }
-
 }

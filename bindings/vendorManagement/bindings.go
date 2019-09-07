@@ -28,10 +28,10 @@ var (
 )
 
 // VendormanagementABI is the input ABI used to generate the binding from.
-const VendormanagementABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_location\",\"type\":\"bytes32\"}],\"name\":\"removeProductLocation\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"products\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"soldAt\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32[]\",\"name\":\"_locations\",\"type\":\"bytes32[]\"},{\"internalType\":\"uint256\",\"name\":\"_cost\",\"type\":\"uint256\"}],\"name\":\"registerProduct\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"id\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_location\",\"type\":\"bytes32\"}],\"name\":\"addProductLocation\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32[]\",\"name\":\"_locations\",\"type\":\"bytes32[]\"}],\"name\":\"ProductRegistered\",\"type\":\"event\"}]"
+const VendormanagementABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_location\",\"type\":\"bytes32\"}],\"name\":\"removeProductLocation\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"products\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"soldAt\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32[]\",\"name\":\"_locations\",\"type\":\"bytes32[]\"},{\"internalType\":\"uint256\",\"name\":\"_cost\",\"type\":\"uint256\"}],\"name\":\"registerProduct\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"id\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_location\",\"type\":\"bytes32\"}],\"name\":\"addProductLocation\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32[]\",\"name\":\"_locations\",\"type\":\"bytes32[]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_cost\",\"type\":\"uint256\"}],\"name\":\"ProductRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_location\",\"type\":\"bytes32\"}],\"name\":\"ProductLocationAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_name\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_location\",\"type\":\"bytes32\"}],\"name\":\"ProductLocationRemoved\",\"type\":\"event\"}]"
 
 // VendormanagementBin is the compiled bytecode used for deploying new contracts.
-var VendormanagementBin = "0x608060405234801561001057600080fd5b50604080513360601b602080830191909152825180830360140181526034909201909252805191012060015561040a8061004b6000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c80639d9497881161005b5780639d94978814610113578063aa14471814610136578063af640d0f146101e2578063c4fe2f93146100825761007d565b8063310f7b911461008257806379054391146100b95780638da5cb5b146100ef575b600080fd5b6100a56004803603604081101561009857600080fd5b50803590602001356101fc565b604080519115158252519081900360200190f35b6100d6600480360360208110156100cf57600080fd5b503561027c565b6040805192835260208301919091528051918290030190f35b6100f7610295565b604080516001600160a01b039092168252519081900360200190f35b6100a56004803603604081101561012957600080fd5b50803590602001356102a4565b6100a56004803603606081101561014c57600080fd5b8135919081019060408101602082013564010000000081111561016e57600080fd5b82018360208201111561018057600080fd5b803590602001918460208302840111640100000000831117156101a257600080fd5b91908080602002602001604051908101604052809392919081815260200183836020028082843760009201919091525092955050913592506102c4915050565b6101ea6103ac565b60408051918252519081900360200190f35b60006102066103b2565b610251576040805162461bcd60e51b815260206004820152601760248201527618d85b1b195c881b5d5cdd081899481d995b991bdc9959604a1b604482015290519081900360640190fd5b5060009182526003602090815260408084209284529190529020805460ff1916600190811790915590565b6002602052600090815260409020805460019091015482565b6000546001600160a01b031681565b600360209081526000928352604080842090915290825290205460ff1681565b60006102ce6103b2565b610319576040805162461bcd60e51b815260206004820152601760248201527618d85b1b195c881b5d5cdd081899481d995b991bdc9959604a1b604482015290519081900360640190fd5b6040805180820182528581526020808201858152600088815260029092529281209151825591516001909101555b83518110156103a157600085815260036020526040812085516001929087908590811061037057fe5b6020908102919091018101518252810191909152604001600020805460ff1916911515919091179055600101610347565b506001949350505050565b60015481565b600080546001600160a01b03163314156103ce575060016103d2565b5060005b9056fea265627a7a72315820418b8ca00e4f0357d9abec5bd163d9b77fda4927d584da6e8892d4fae79c3e0b64736f6c634300050b0032"
+var VendormanagementBin = "0x608060405234801561001057600080fd5b506040805133606081901b60208084019190915283518084036014018152603490930190935281519190920120600155600080546001600160a01b03191690911790556105a8806100626000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c80639d9497881161005b5780639d94978814610113578063aa14471814610136578063af640d0f146101e2578063c4fe2f93146101fc5761007d565b8063310f7b911461008257806379054391146100b95780638da5cb5b146100ef575b600080fd5b6100a56004803603604081101561009857600080fd5b508035906020013561021f565b604080519115158252519081900360200190f35b6100d6600480360360208110156100cf57600080fd5b50356102da565b6040805192835260208301919091528051918290030190f35b6100f76102f3565b604080516001600160a01b039092168252519081900360200190f35b6100a56004803603604081101561012957600080fd5b5080359060200135610302565b6100a56004803603606081101561014c57600080fd5b8135919081019060408101602082013564010000000081111561016e57600080fd5b82018360208201111561018057600080fd5b803590602001918460208302840111640100000000831117156101a257600080fd5b9190808060200260200160405190810160405280939291908181526020018383602002808284376000920191909152509295505091359250610322915050565b6101ea61048f565b60408051918252519081900360200190f35b6100a56004803603604081101561021257600080fd5b5080359060200135610495565b6000610229610550565b610274576040805162461bcd60e51b815260206004820152601760248201527618d85b1b195c881b5d5cdd081899481d995b991bdc9959604a1b604482015290519081900360640190fd5b6000838152600360209081526040808320858452825291829020805460ff19166001179055815185815290810184905281517fa16e19a51eb50f485a1110b0c514e093a9a1676f77216aa019505467af0bee48929181900390910190a150600192915050565b6002602052600090815260409020805460019091015482565b6000546001600160a01b031681565b600360209081526000928352604080842090915290825290205460ff1681565b600061032c610550565b610377576040805162461bcd60e51b815260206004820152601760248201527618d85b1b195c881b5d5cdd081899481d995b991bdc9959604a1b604482015290519081900360640190fd5b6040805180820182528581526020808201858152600088815260029092529281209151825591516001909101555b83518110156103ff5760008581526003602052604081208551600192908790859081106103ce57fe5b6020908102919091018101518252810191909152604001600020805460ff19169115159190911790556001016103a5565b507f86a0e56ff60b92d5010a66e5f314a5433028ab1db0ef9bdcdb19db16b35654f18484846040518084815260200180602001838152602001828103825284818151815260200191508051906020019060200280838360005b83811015610470578181015183820152602001610458565b5050505090500194505050505060405180910390a15060019392505050565b60015481565b600061049f610550565b6104ea576040805162461bcd60e51b815260206004820152601760248201527618d85b1b195c881b5d5cdd081899481d995b991bdc9959604a1b604482015290519081900360640190fd5b6000838152600360209081526040808320858452825291829020805460ff19166001179055815185815290810184905281517fc16ed24d108fc30d7daeb46fc1ead0b3251c5a6cd18a0496071802e55c9f8373929181900390910190a150600192915050565b600080546001600160a01b031633141561056c57506001610570565b5060005b9056fea265627a7a72315820305cef4513b54eb970ce9c7844516d376e7bb5a555283c34db534a7172174d0264736f6c634300050b0032"
 
 // DeployVendormanagement deploys a new Ethereum contract, binding an instance of Vendormanagement to it.
 func DeployVendormanagement(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *Vendormanagement, error) {
@@ -366,6 +366,274 @@ func (_Vendormanagement *VendormanagementTransactorSession) RemoveProductLocatio
 	return _Vendormanagement.Contract.RemoveProductLocation(&_Vendormanagement.TransactOpts, _name, _location)
 }
 
+// VendormanagementProductLocationAddedIterator is returned from FilterProductLocationAdded and is used to iterate over the raw logs and unpacked data for ProductLocationAdded events raised by the Vendormanagement contract.
+type VendormanagementProductLocationAddedIterator struct {
+	Event *VendormanagementProductLocationAdded // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *VendormanagementProductLocationAddedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(VendormanagementProductLocationAdded)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(VendormanagementProductLocationAdded)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *VendormanagementProductLocationAddedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *VendormanagementProductLocationAddedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// VendormanagementProductLocationAdded represents a ProductLocationAdded event raised by the Vendormanagement contract.
+type VendormanagementProductLocationAdded struct {
+	Name     [32]byte
+	Location [32]byte
+	Raw      types.Log // Blockchain specific contextual infos
+}
+
+// FilterProductLocationAdded is a free log retrieval operation binding the contract event 0xc16ed24d108fc30d7daeb46fc1ead0b3251c5a6cd18a0496071802e55c9f8373.
+//
+// Solidity: event ProductLocationAdded(bytes32 _name, bytes32 _location)
+func (_Vendormanagement *VendormanagementFilterer) FilterProductLocationAdded(opts *bind.FilterOpts) (*VendormanagementProductLocationAddedIterator, error) {
+
+	logs, sub, err := _Vendormanagement.contract.FilterLogs(opts, "ProductLocationAdded")
+	if err != nil {
+		return nil, err
+	}
+	return &VendormanagementProductLocationAddedIterator{contract: _Vendormanagement.contract, event: "ProductLocationAdded", logs: logs, sub: sub}, nil
+}
+
+// WatchProductLocationAdded is a free log subscription operation binding the contract event 0xc16ed24d108fc30d7daeb46fc1ead0b3251c5a6cd18a0496071802e55c9f8373.
+//
+// Solidity: event ProductLocationAdded(bytes32 _name, bytes32 _location)
+func (_Vendormanagement *VendormanagementFilterer) WatchProductLocationAdded(opts *bind.WatchOpts, sink chan<- *VendormanagementProductLocationAdded) (event.Subscription, error) {
+
+	logs, sub, err := _Vendormanagement.contract.WatchLogs(opts, "ProductLocationAdded")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(VendormanagementProductLocationAdded)
+				if err := _Vendormanagement.contract.UnpackLog(event, "ProductLocationAdded", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseProductLocationAdded is a log parse operation binding the contract event 0xc16ed24d108fc30d7daeb46fc1ead0b3251c5a6cd18a0496071802e55c9f8373.
+//
+// Solidity: event ProductLocationAdded(bytes32 _name, bytes32 _location)
+func (_Vendormanagement *VendormanagementFilterer) ParseProductLocationAdded(log types.Log) (*VendormanagementProductLocationAdded, error) {
+	event := new(VendormanagementProductLocationAdded)
+	if err := _Vendormanagement.contract.UnpackLog(event, "ProductLocationAdded", log); err != nil {
+		return nil, err
+	}
+	return event, nil
+}
+
+// VendormanagementProductLocationRemovedIterator is returned from FilterProductLocationRemoved and is used to iterate over the raw logs and unpacked data for ProductLocationRemoved events raised by the Vendormanagement contract.
+type VendormanagementProductLocationRemovedIterator struct {
+	Event *VendormanagementProductLocationRemoved // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *VendormanagementProductLocationRemovedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(VendormanagementProductLocationRemoved)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(VendormanagementProductLocationRemoved)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *VendormanagementProductLocationRemovedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *VendormanagementProductLocationRemovedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// VendormanagementProductLocationRemoved represents a ProductLocationRemoved event raised by the Vendormanagement contract.
+type VendormanagementProductLocationRemoved struct {
+	Name     [32]byte
+	Location [32]byte
+	Raw      types.Log // Blockchain specific contextual infos
+}
+
+// FilterProductLocationRemoved is a free log retrieval operation binding the contract event 0xa16e19a51eb50f485a1110b0c514e093a9a1676f77216aa019505467af0bee48.
+//
+// Solidity: event ProductLocationRemoved(bytes32 _name, bytes32 _location)
+func (_Vendormanagement *VendormanagementFilterer) FilterProductLocationRemoved(opts *bind.FilterOpts) (*VendormanagementProductLocationRemovedIterator, error) {
+
+	logs, sub, err := _Vendormanagement.contract.FilterLogs(opts, "ProductLocationRemoved")
+	if err != nil {
+		return nil, err
+	}
+	return &VendormanagementProductLocationRemovedIterator{contract: _Vendormanagement.contract, event: "ProductLocationRemoved", logs: logs, sub: sub}, nil
+}
+
+// WatchProductLocationRemoved is a free log subscription operation binding the contract event 0xa16e19a51eb50f485a1110b0c514e093a9a1676f77216aa019505467af0bee48.
+//
+// Solidity: event ProductLocationRemoved(bytes32 _name, bytes32 _location)
+func (_Vendormanagement *VendormanagementFilterer) WatchProductLocationRemoved(opts *bind.WatchOpts, sink chan<- *VendormanagementProductLocationRemoved) (event.Subscription, error) {
+
+	logs, sub, err := _Vendormanagement.contract.WatchLogs(opts, "ProductLocationRemoved")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(VendormanagementProductLocationRemoved)
+				if err := _Vendormanagement.contract.UnpackLog(event, "ProductLocationRemoved", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseProductLocationRemoved is a log parse operation binding the contract event 0xa16e19a51eb50f485a1110b0c514e093a9a1676f77216aa019505467af0bee48.
+//
+// Solidity: event ProductLocationRemoved(bytes32 _name, bytes32 _location)
+func (_Vendormanagement *VendormanagementFilterer) ParseProductLocationRemoved(log types.Log) (*VendormanagementProductLocationRemoved, error) {
+	event := new(VendormanagementProductLocationRemoved)
+	if err := _Vendormanagement.contract.UnpackLog(event, "ProductLocationRemoved", log); err != nil {
+		return nil, err
+	}
+	return event, nil
+}
+
 // VendormanagementProductRegisteredIterator is returned from FilterProductRegistered and is used to iterate over the raw logs and unpacked data for ProductRegistered events raised by the Vendormanagement contract.
 type VendormanagementProductRegisteredIterator struct {
 	Event *VendormanagementProductRegistered // Event containing the contract specifics and raw log
@@ -437,12 +705,13 @@ func (it *VendormanagementProductRegisteredIterator) Close() error {
 type VendormanagementProductRegistered struct {
 	Name      [32]byte
 	Locations [][32]byte
+	Cost      *big.Int
 	Raw       types.Log // Blockchain specific contextual infos
 }
 
-// FilterProductRegistered is a free log retrieval operation binding the contract event 0x5557af5bef645f9effaf31614a385de3b8fcb7973118a4e7e28a65e57e163d8a.
+// FilterProductRegistered is a free log retrieval operation binding the contract event 0x86a0e56ff60b92d5010a66e5f314a5433028ab1db0ef9bdcdb19db16b35654f1.
 //
-// Solidity: event ProductRegistered(bytes32 _name, bytes32[] _locations)
+// Solidity: event ProductRegistered(bytes32 _name, bytes32[] _locations, uint256 _cost)
 func (_Vendormanagement *VendormanagementFilterer) FilterProductRegistered(opts *bind.FilterOpts) (*VendormanagementProductRegisteredIterator, error) {
 
 	logs, sub, err := _Vendormanagement.contract.FilterLogs(opts, "ProductRegistered")
@@ -452,9 +721,9 @@ func (_Vendormanagement *VendormanagementFilterer) FilterProductRegistered(opts 
 	return &VendormanagementProductRegisteredIterator{contract: _Vendormanagement.contract, event: "ProductRegistered", logs: logs, sub: sub}, nil
 }
 
-// WatchProductRegistered is a free log subscription operation binding the contract event 0x5557af5bef645f9effaf31614a385de3b8fcb7973118a4e7e28a65e57e163d8a.
+// WatchProductRegistered is a free log subscription operation binding the contract event 0x86a0e56ff60b92d5010a66e5f314a5433028ab1db0ef9bdcdb19db16b35654f1.
 //
-// Solidity: event ProductRegistered(bytes32 _name, bytes32[] _locations)
+// Solidity: event ProductRegistered(bytes32 _name, bytes32[] _locations, uint256 _cost)
 func (_Vendormanagement *VendormanagementFilterer) WatchProductRegistered(opts *bind.WatchOpts, sink chan<- *VendormanagementProductRegistered) (event.Subscription, error) {
 
 	logs, sub, err := _Vendormanagement.contract.WatchLogs(opts, "ProductRegistered")
@@ -489,9 +758,9 @@ func (_Vendormanagement *VendormanagementFilterer) WatchProductRegistered(opts *
 	}), nil
 }
 
-// ParseProductRegistered is a log parse operation binding the contract event 0x5557af5bef645f9effaf31614a385de3b8fcb7973118a4e7e28a65e57e163d8a.
+// ParseProductRegistered is a log parse operation binding the contract event 0x86a0e56ff60b92d5010a66e5f314a5433028ab1db0ef9bdcdb19db16b35654f1.
 //
-// Solidity: event ProductRegistered(bytes32 _name, bytes32[] _locations)
+// Solidity: event ProductRegistered(bytes32 _name, bytes32[] _locations, uint256 _cost)
 func (_Vendormanagement *VendormanagementFilterer) ParseProductRegistered(log types.Log) (*VendormanagementProductRegistered, error) {
 	event := new(VendormanagementProductRegistered)
 	if err := _Vendormanagement.contract.UnpackLog(event, "ProductRegistered", log); err != nil {

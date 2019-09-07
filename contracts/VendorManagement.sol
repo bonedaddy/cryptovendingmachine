@@ -15,11 +15,13 @@ contract VendorManagement {
     // k2 = vending machine
     mapping(bytes32 => mapping(bytes32 => bool)) public soldAt;
 
-    event ProductRegistered(bytes32 _name, bytes32[] _locations);
-
+    event ProductRegistered(bytes32 _name, bytes32[] _locations, uint256 _cost);
+    event ProductLocationAdded(bytes32 _name, bytes32 _location);
+    event ProductLocationRemoved(bytes32 _name, bytes32 _location);
 
     constructor() public {
         id = keccak256(abi.encodePacked(msg.sender));
+        owner = msg.sender;
     }
 
     function registerProduct(bytes32 _name, bytes32[] memory _locations, uint256 _cost) public returns (bool) {
@@ -29,18 +31,21 @@ contract VendorManagement {
         for (uint256 i = 0; i < _locations.length; i++) {
             soldAt[_name][_locations[i]] = true;
         }
+        emit ProductRegistered(_name, _locations, _cost);
         return true;
     }
 
     function addProductLocation(bytes32 _name, bytes32 _location) public returns (bool) {
         require(onlyVendor(), "caller must be vendored");
         soldAt[_name][_location] = true;
+        emit ProductLocationAdded(_name, _location);
         return true;
     }
 
     function removeProductLocation(bytes32 _name, bytes32 _location) public returns (bool) {
         require(onlyVendor(), "caller must be vendored");
         soldAt[_name][_location] = true;
+        emit ProductLocationRemoved(_name, _location);
         return true;
     }
 

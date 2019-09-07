@@ -74,8 +74,8 @@ func RegisterProduct(
 	tx, err := contract.RegisterProduct(
 		auth,
 		"lays chip",
-		[]string{"1", "2"},
-		big.NewInt(1),
+		[]string{"1", "da hood"},
+		oneEthInWei,
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -191,6 +191,29 @@ func AddVendor(
 	contractAddress common.Address,
 ) error {
 	tx, err := contract.AddVendor(auth, "lays", contractAddress)
+	if err != nil {
+		return err
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		return err
+	}
+	return nil
+}
+
+// PurchaseProduct is used to purchase a product from the vending machine
+func PurchaseProduct(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+	contract *bindingsm.Vendingmachine,
+) error {
+	auth.Value = oneEthInWei
+	// defer reset of transaction value
+	defer func() {
+		auth.Value = nil
+	}()
+	tx, err := contract.PurchaseProduct(auth, "lays", "lays chip")
 	if err != nil {
 		return err
 	}

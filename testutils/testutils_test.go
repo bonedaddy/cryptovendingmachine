@@ -246,7 +246,7 @@ func Test_VendorFactory(t *testing.T) {
 
 func Test_VendingMachine(t *testing.T) {
 	auth, sim := NewBlockchain(t)
-	_, managementAddr := DeployVendorManagement(t, sim, auth)
+	manageContract, managementAddr := DeployVendorManagement(t, sim, auth)
 	contract, addr := DeployVendingMachine(t, sim, auth)
 	if _, err := bindingsm.NewVendingmachine(addr, sim); err != nil {
 		t.Fatal(err)
@@ -297,4 +297,10 @@ func Test_VendingMachine(t *testing.T) {
 		t.Fatal("bad vendor contract returned")
 	}
 	// TODO(postables): add purchase tests
+
+	// register products for sale
+	RegisterProduct(t, sim, auth, manageContract)
+	if err := PurchaseProduct(t, sim, auth, contract); err != nil {
+		t.Fatal(err)
+	}
 }

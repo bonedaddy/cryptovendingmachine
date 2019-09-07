@@ -79,7 +79,7 @@ func Test_VendorManagement(t *testing.T) {
 	isSold, err = contract.SoldAt(
 		nil,
 		"lays chip",
-		"2",
+		"da hood",
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -190,7 +190,7 @@ func Test_VendorFactory(t *testing.T) {
 	isSold, err = management.SoldAt(
 		nil,
 		"lays chip",
-		"2",
+		"da hood",
 	)
 	if err != nil {
 		t.Fatal(err)

@@ -71,8 +71,8 @@ func RegisterProduct(
 ) {
 	tx, err := contract.RegisterProduct(
 		auth,
-		SumKeccak256([]byte("lays chip")),
-		[][32]byte{SumKeccak256([]byte("1")), SumKeccak256([]byte("2"))},
+		"lays chip",
+		[]string{"1", "2"},
 		big.NewInt(1),
 	)
 	if err != nil {
@@ -93,8 +93,8 @@ func AddProductLocation(
 ) {
 	tx, err := contract.AddProductLocation(
 		auth,
-		SumKeccak256([]byte("lays chip")),
-		SumKeccak256([]byte("3")),
+		"lays chip",
+		"3",
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -114,8 +114,8 @@ func RemoveProductLocation(
 ) {
 	tx, err := contract.RemoveProductLocation(
 		auth,
-		SumKeccak256([]byte("lays chip")),
-		SumKeccak256([]byte("3")),
+		"lays chip",
+		"3",
 	)
 	if err != nil {
 		t.Fatal(err)

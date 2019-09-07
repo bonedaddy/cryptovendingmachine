@@ -12,9 +12,7 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"io/ioutil"
-
-	"os"
+	bindingsvm "github.com/postables/cryptovendingmachine/bindings/vendorManagement"
 )
 
 var (
@@ -44,7 +42,22 @@ func printGasUsed(t *testing.T, sim *backends.SimulatedBackend, hash common.Hash
 	}
 	msg := fmt.Sprint("gas used: ", rcpt.CumulativeGasUsed)
 	fmt.Println(msg)
-	if err := ioutil.WriteFile(fmt.Sprintf("%s.gas.log", contract), []byte(msg), os.FileMode(0640)); err != nil {
+}
+
+// DeployVendorManagement is used to deploy the vendor management contract
+func DeployVendorManagement(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+) (*bindingsvm.Vendormanagement, common.Address) {
+	addr, tx, contract, err := bindingsvm.DeployVendormanagement(auth, sim)
+	if err != nil {
 		t.Fatal(err)
 	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		t.Fatal(err)
+	}
+	printGasUsed(t, sim, tx.Hash(), "vendor-management")
+	return contract, addr
 }

@@ -3,6 +3,8 @@ package testutils
 import (
 	"fmt"
 	"testing"
+
+	bindingsvm "github.com/postables/cryptovendingmachine/bindings/vendorManagement"
 )
 
 var (
@@ -37,4 +39,12 @@ func Test_FormatCID(t *testing.T) {
 
 func Test_NewBlockchain(t *testing.T) {
 	_, _ = NewBlockchain(t)
+}
+
+func Test_DeployVendorManagement(t *testing.T) {
+	auth, sim := NewBlockchain(t)
+	_, addr := DeployVendorManagement(t, sim, auth)
+	if _, err := bindingsvm.NewVendormanagement(addr, sim); err != nil {
+		t.Fatal(err)
+	}
 }

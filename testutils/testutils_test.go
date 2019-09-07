@@ -146,6 +146,7 @@ func Test_VendorFactory(t *testing.T) {
 	if err := NewVendor(t, sim, auth, contract); err == nil {
 		t.Fatal("error expected")
 	}
+	// test that they're registered
 	isRegistered, err := contract.RegisteredVendors(nil, auth.From)
 	if err != nil {
 		t.Fatal(err)
@@ -153,15 +154,17 @@ func Test_VendorFactory(t *testing.T) {
 	if !isRegistered {
 		t.Fatal("vendor should be registered")
 	}
-
+	// get the management contract address from the vendor address
 	managementAddr, err := contract.VendorContract(nil, auth.From)
 	if err != nil {
 		t.Fatal(err)
 	}
+	// construct management contract wrapping
 	management, err := bindingsvm.NewVendormanagement(managementAddr, sim)
 	if err != nil {
 		t.Fatal(err)
 	}
+	// conduct all vendor management tests
 	retID, err := management.Id(nil)
 	if err != nil {
 		t.Fatal(err)

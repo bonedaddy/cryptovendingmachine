@@ -2,6 +2,7 @@ package testutils
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 
 	bindingsvm "github.com/postables/cryptovendingmachine/bindings/vendorManagement"
@@ -52,13 +53,12 @@ func Test_DeployVendorManagement(t *testing.T) {
 func Test_VendorManagement(t *testing.T) {
 	auth, sim := NewBlockchain(t)
 	contract, _ := DeployVendorManagement(t, sim, auth)
-	RegisterVendor(t, sim, auth, contract)
-	resp, err := contract.Vendors(nil, SumKeccak256(auth.From.Bytes()))
+	retID, err := contract.Id(nil)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if resp.State != 1 {
-		t.Fatal("vendor not registered")
+	if !reflect.DeepEqual(retID, SumKeccak256(auth.From.Bytes())) {
+		t.Fatal("bad id")
 	}
-	RegisterProduct(t, sim, auth, contract)
+
 }

@@ -62,23 +62,6 @@ func DeployVendorManagement(
 	return contract, addr
 }
 
-// RegisterVendor is used to register a vendor
-func RegisterVendor(
-	t *testing.T,
-	sim *backends.SimulatedBackend,
-	auth *bind.TransactOpts,
-	contract *bindingsvm.Vendormanagement,
-) {
-	tx, err := contract.RegisterVendor(auth)
-	if err != nil {
-		t.Fatal(err)
-	}
-	sim.Commit()
-	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
-		t.Fatal(err)
-	}
-}
-
 // RegisterProduct is used to register a product
 func RegisterProduct(
 	t *testing.T,
@@ -90,6 +73,7 @@ func RegisterProduct(
 		auth,
 		SumKeccak256([]byte("lays chip")),
 		[][32]byte{SumKeccak256([]byte("1")), SumKeccak256([]byte("2"))},
+		big.NewInt(1),
 	)
 	if err != nil {
 		t.Fatal(err)

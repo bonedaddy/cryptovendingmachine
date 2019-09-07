@@ -83,3 +83,45 @@ func RegisterProduct(
 		t.Fatal(err)
 	}
 }
+
+// AddProductLocation is used to add a product location
+func AddProductLocation(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+	contract *bindingsvm.Vendormanagement,
+) {
+	tx, err := contract.AddProductLocation(
+		auth,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("3")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		t.Fatal(err)
+	}
+}
+
+// RemoveProductLocation is used to add a product location
+func RemoveProductLocation(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+	contract *bindingsvm.Vendormanagement,
+) {
+	tx, err := contract.RemoveProductLocation(
+		auth,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("3")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		t.Fatal(err)
+	}
+}

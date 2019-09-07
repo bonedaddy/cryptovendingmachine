@@ -60,5 +60,73 @@ func Test_VendorManagement(t *testing.T) {
 	if !reflect.DeepEqual(retID, SumKeccak256(auth.From.Bytes())) {
 		t.Fatal("bad id")
 	}
-
+	RegisterProduct(t, sim, auth, contract)
+	isSold, err := contract.SoldAt(
+		nil,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("1")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
+	isSold, err = contract.SoldAt(
+		nil,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("2")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
+	isSold, err = contract.SoldAt(
+		nil,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("3")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if isSold {
+		t.Fatal("product should not be sold at location")
+	}
+	AddProductLocation(t, sim, auth, contract)
+	isSold, err = contract.SoldAt(
+		nil,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("3")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
+	RemoveProductLocation(t, sim, auth, contract)
+	isSold, err = contract.SoldAt(
+		nil,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("3")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if isSold {
+		t.Fatal("product should not be sold at location")
+	}
+	isSold, err = contract.SoldAt(
+		nil,
+		SumKeccak256([]byte("lays chip")),
+		SumKeccak256([]byte("2")),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
 }

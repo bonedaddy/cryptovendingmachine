@@ -48,3 +48,17 @@ func Test_DeployVendorManagement(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func Test_VendorManagement(t *testing.T) {
+	auth, sim := NewBlockchain(t)
+	contract, _ := DeployVendorManagement(t, sim, auth)
+	RegisterVendor(t, sim, auth, contract)
+	resp, err := contract.Vendors(nil, SumKeccak256(auth.From.Bytes()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if resp.State != 1 {
+		t.Fatal("vendor not registered")
+	}
+	RegisterProduct(t, sim, auth, contract)
+}

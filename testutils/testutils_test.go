@@ -146,4 +146,96 @@ func Test_VendorFactory(t *testing.T) {
 	if err := NewVendor(t, sim, auth, contract); err == nil {
 		t.Fatal("error expected")
 	}
+	isRegistered, err := contract.RegisteredVendors(nil, auth.From)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isRegistered {
+		t.Fatal("vendor should be registered")
+	}
+
+	managementAddr, err := contract.VendorContract(nil, auth.From)
+	if err != nil {
+		t.Fatal(err)
+	}
+	management, err := bindingsvm.NewVendormanagement(managementAddr, sim)
+	if err != nil {
+		t.Fatal(err)
+	}
+	retID, err := management.Id(nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !reflect.DeepEqual(retID, SumKeccak256(auth.From.Bytes())) {
+		t.Fatal("bad id")
+	}
+	RegisterProduct(t, sim, auth, management)
+	isSold, err := management.SoldAt(
+		nil,
+		"lays chip",
+		"1",
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
+	isSold, err = management.SoldAt(
+		nil,
+		"lays chip",
+		"2",
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
+	isSold, err = management.SoldAt(
+		nil,
+		"lays chip",
+		"3",
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if isSold {
+		t.Fatal("product should not be sold at location")
+	}
+	AddProductLocation(t, sim, auth, management)
+	isSold, err = management.SoldAt(
+		nil,
+		"lays chip",
+		"3",
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
+	RemoveProductLocation(t, sim, auth, management)
+	isSold, err = management.SoldAt(
+		nil,
+		"lays chip",
+		"3",
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if isSold {
+		t.Fatal("product should not be sold at location")
+	}
+	isSold, err = management.SoldAt(
+		nil,
+		"lays chip",
+		"2",
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isSold {
+		t.Fatal("product should be sold at location")
+	}
 }

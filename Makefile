@@ -21,6 +21,15 @@ compile:
 	--overwrite \
 	-o bin/vendorFactory \
 	contracts/VendorFactory.sol
+	# compile vending machine
+	solc \
+	--optimize \
+	--optimize-runs 200 \
+	--bin \
+	--abi \
+	--overwrite \
+	-o bin/vendingMachine \
+	contracts/VendingMachine.sol
 
 .PHONY: bindings
 bindings:
@@ -50,3 +59,8 @@ imports:
 .PHONY: fmt
 fmt:
 	find . -type f -name '*.go' -exec gofmt -s -w {} \;
+
+.PHONY: interfaces
+interfaces:
+# uncomment to regenerate, this will wipe some nice settings
+#	/home/solidity/.npm-global/bin/abi2solidity --input bin/vendorManagement/VendorManagement.abi --output contracts/Interfaces/VendorManagementI.sol

@@ -28,10 +28,10 @@ var (
 )
 
 // VendingmachineABI is the input ABI used to generate the binding from.
-const VendingmachineABI = "[{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"vendors\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_vendorContract\",\"type\":\"address\"}],\"name\":\"addVendor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+const VendingmachineABI = "[{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"vendors\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_vendorContract\",\"type\":\"address\"}],\"name\":\"addVendor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"vendorContracts\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}]"
 
 // VendingmachineBin is the compiled bytecode used for deploying new contracts.
-var VendingmachineBin = "0x608060405234801561001057600080fd5b506101d9806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806327e30c361461003b57806345e0f75314610075575b600080fd5b6100616004803603602081101561005157600080fd5b50356001600160a01b031661009b565b604080519115158252519081900360200190f35b6100616004803603602081101561008b57600080fd5b50356001600160a01b03166100b0565b60006020819052908152604090205460ff1681565b600080829050336001600160a01b0316816001600160a01b0316638da5cb5b6040518163ffffffff1660e01b815260040160206040518083038186803b1580156100f957600080fd5b505afa15801561010d573d6000803e3d6000fd5b505050506040513d602081101561012357600080fd5b50516001600160a01b031614610180576040805162461bcd60e51b815260206004820152601d60248201527f63616c6c6572206d7573742062652076656e646f72206d616e61676572000000604482015290519081900360640190fd5b5050336000908152602081905260409020805460ff1916600190811790915591905056fea265627a7a723158209ef08f15300f2da2b755db727e6244d1211fc70d742d500a155dd643a68fa89864736f6c634300050b0032"
+var VendingmachineBin = "0x608060405234801561001057600080fd5b506102c8806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806327e30c361461004657806345e0f75314610080578063a46ead24146100a6575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b03166100e8565b604080519115158252519081900360200190f35b61006c6004803603602081101561009657600080fd5b50356001600160a01b03166100fd565b6100cc600480360360208110156100bc57600080fd5b50356001600160a01b0316610278565b604080516001600160a01b039092168252519081900360200190f35b60006020819052908152604090205460ff1681565b3360009081526020819052604081205460ff1615610162576040805162461bcd60e51b815260206004820152601d60248201527f76656e646f72206d757374206e6f742062652072656769737465726564000000604482015290519081900360640190fd5b6000829050336001600160a01b0316816001600160a01b0316638da5cb5b6040518163ffffffff1660e01b815260040160206040518083038186803b1580156101aa57600080fd5b505afa1580156101be573d6000803e3d6000fd5b505050506040513d60208110156101d457600080fd5b50516001600160a01b031614610231576040805162461bcd60e51b815260206004820152601d60248201527f63616c6c6572206d7573742062652076656e646f72206d616e61676572000000604482015290519081900360640190fd5b505033600090815260208181526040808320805460ff191660019081179091559182905290912080546001600160a01b0384166001600160a01b0319909116179055919050565b6001602052600090815260409020546001600160a01b03168156fea265627a7a72315820ce951692c6e37a053d47d3610fbce3e773348c9bac8c91b0b952bc164babca5764736f6c634300050b0032"
 
 // DeployVendingmachine deploys a new Ethereum contract, binding an instance of Vendingmachine to it.
 func DeployVendingmachine(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *Vendingmachine, error) {
@@ -187,6 +187,32 @@ func (_Vendingmachine *VendingmachineTransactorRaw) Transfer(opts *bind.Transact
 // Transact invokes the (paid) contract method with params as input values.
 func (_Vendingmachine *VendingmachineTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
 	return _Vendingmachine.Contract.contract.Transact(opts, method, params...)
+}
+
+// VendorContracts is a free data retrieval call binding the contract method 0xa46ead24.
+//
+// Solidity: function vendorContracts(address ) constant returns(address)
+func (_Vendingmachine *VendingmachineCaller) VendorContracts(opts *bind.CallOpts, arg0 common.Address) (common.Address, error) {
+	var (
+		ret0 = new(common.Address)
+	)
+	out := ret0
+	err := _Vendingmachine.contract.Call(opts, out, "vendorContracts", arg0)
+	return *ret0, err
+}
+
+// VendorContracts is a free data retrieval call binding the contract method 0xa46ead24.
+//
+// Solidity: function vendorContracts(address ) constant returns(address)
+func (_Vendingmachine *VendingmachineSession) VendorContracts(arg0 common.Address) (common.Address, error) {
+	return _Vendingmachine.Contract.VendorContracts(&_Vendingmachine.CallOpts, arg0)
+}
+
+// VendorContracts is a free data retrieval call binding the contract method 0xa46ead24.
+//
+// Solidity: function vendorContracts(address ) constant returns(address)
+func (_Vendingmachine *VendingmachineCallerSession) VendorContracts(arg0 common.Address) (common.Address, error) {
+	return _Vendingmachine.Contract.VendorContracts(&_Vendingmachine.CallOpts, arg0)
 }
 
 // Vendors is a free data retrieval call binding the contract method 0x27e30c36.

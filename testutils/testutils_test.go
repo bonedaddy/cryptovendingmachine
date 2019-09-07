@@ -1,10 +1,12 @@
 package testutils
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"testing"
 
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	bindingsm "github.com/postables/cryptovendingmachine/bindings/vendingMachine"
 	bindingsf "github.com/postables/cryptovendingmachine/bindings/vendorFactory"
 	bindingsvm "github.com/postables/cryptovendingmachine/bindings/vendorManagement"
@@ -298,9 +300,21 @@ func Test_VendingMachine(t *testing.T) {
 	}
 	// TODO(postables): add purchase tests
 
+	// test a bad withdraw because there are no funds
+	if _, err = manageContract.WithdrawFunds(auth); err == nil {
+		t.Fatal("error expected")
+	}
 	// register products for sale
 	RegisterProduct(t, sim, auth, manageContract)
 	if err := PurchaseProduct(t, sim, auth, contract); err != nil {
+		t.Fatal(err)
+	}
+	tx, err := manageContract.WithdrawFunds(auth)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -273,4 +273,28 @@ func Test_VendingMachine(t *testing.T) {
 	if err := AddVendor(t, sim, auth, contract, managementAddr); err == nil {
 		t.Fatal("error expected")
 	}
+	// test vendor registration
+	isRegistered, err := contract.Vendors(nil, auth.From)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !isRegistered {
+		t.Fatal("vendor should be registered")
+	}
+	retVendorContract, err := contract.VendorContracts(nil, auth.From)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if retVendorContract != managementAddr {
+		t.Fatal("bad vendor contract returned")
+	}
+	// test vendor name to vendor contract lookup
+	retManageContract, err := contract.VendorNames(nil, "lays")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if retManageContract != managementAddr {
+		t.Fatal("bad vendor contract returned")
+	}
+	// TODO(postables): add purchase tests
 }

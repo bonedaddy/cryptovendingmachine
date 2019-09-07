@@ -190,7 +190,7 @@ func AddVendor(
 	contract *bindingsm.Vendingmachine,
 	contractAddress common.Address,
 ) error {
-	tx, err := contract.AddVendor(auth, contractAddress)
+	tx, err := contract.AddVendor(auth, "lays", contractAddress)
 	if err != nil {
 		return err
 	}

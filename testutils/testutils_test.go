@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"testing"
 
+	bindingsf "github.com/postables/cryptovendingmachine/bindings/vendorFactory"
 	bindingsvm "github.com/postables/cryptovendingmachine/bindings/vendorManagement"
 )
 
@@ -128,5 +129,21 @@ func Test_VendorManagement(t *testing.T) {
 	}
 	if !isSold {
 		t.Fatal("product should be sold at location")
+	}
+}
+
+func Test_VendorFactory(t *testing.T) {
+	auth, sim := NewBlockchain(t)
+	contract, addr := DeployVendorFactory(t, sim, auth)
+	if _, err := bindingsf.NewVendorfactory(addr, sim); err != nil {
+		t.Fatal(err)
+	}
+	// deploy the vendor management contract
+	if err := NewVendor(t, sim, auth, contract); err != nil {
+		t.Fatal(err)
+	}
+	// test another deploy, this should fail
+	if err := NewVendor(t, sim, auth, contract); err == nil {
+		t.Fatal("error expected")
 	}
 }

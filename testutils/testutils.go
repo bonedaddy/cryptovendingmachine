@@ -12,6 +12,7 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/crypto"
 
+	bindingsf "github.com/postables/cryptovendingmachine/bindings/vendorFactory"
 	bindingsvm "github.com/postables/cryptovendingmachine/bindings/vendorManagement"
 )
 
@@ -124,4 +125,40 @@ func RemoveProductLocation(
 	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
 		t.Fatal(err)
 	}
+}
+
+// DeployVendorFactory is used to deploy the vendor factory
+func DeployVendorFactory(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+) (*bindingsf.Vendorfactory, common.Address) {
+	addr, tx, contract, err := bindingsf.DeployVendorfactory(auth, sim)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		t.Fatal(err)
+	}
+	printGasUsed(t, sim, tx.Hash(), "vendor-factory")
+	return contract, addr
+}
+
+// NewVendor is used to deploy a vendor management contract through the factory
+func NewVendor(
+	t *testing.T,
+	sim *backends.SimulatedBackend,
+	auth *bind.TransactOpts,
+	contract *bindingsf.Vendorfactory,
+) error {
+	tx, err := contract.NewVendor(auth)
+	if err != nil {
+		return err
+	}
+	sim.Commit()
+	if _, err := bind.WaitMined(context.Background(), sim, tx); err != nil {
+		return err
+	}
+	return nil
 }

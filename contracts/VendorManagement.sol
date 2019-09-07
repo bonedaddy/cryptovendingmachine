@@ -44,7 +44,7 @@ contract VendorManagement {
 
     function removeProductLocation(bytes32 _name, bytes32 _location) public returns (bool) {
         require(onlyVendor(), "caller must be vendored");
-        soldAt[_name][_location] = true;
+        delete(soldAt[_name][_location]);
         emit ProductLocationRemoved(_name, _location);
         return true;
     }

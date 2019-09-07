@@ -33,16 +33,24 @@ compile:
 
 .PHONY: bindings
 bindings:
+	# build bindings for vendor management
 	abigen \
 	--abi bin/vendorManagement/VendorManagement.abi \
 	--bin bin/vendorManagement/VendorManagement.bin \
 	--pkg vendormanagement \
 	--out bindings/vendorManagement/bindings.go
+	# build bindings for vendor factory
 	abigen \
 	--abi bin/vendorFactory/VendorFactory.abi \
 	--bin bin/vendorFactory/VendorFactory.bin \
 	--pkg vendorfactory \
 	--out bindings/vendorFactory/bindings.go
+	# build bindings for vending machine
+	abigen \
+	--abi bin/vendingMachine/VendingMachine.abi \
+	--bin bin/vendingMachine/VendingMachine.bin \
+	--pkg vendingmachine \
+	--out bindings/vendingMachine/bindings.go
 
 # run standard go tooling for better readability
 .PHONY: tidy

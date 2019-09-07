@@ -21,8 +21,11 @@ contract VendorManagement {
     event ProductLocationRemoved(string _name, string _location);
 
     constructor() public {
-        id = keccak256(abi.encodePacked(msg.sender));
-        owner = msg.sender;
+        // we use tx.origin because this is being deployed from factory
+        // as such, if we msg.sender the address will be that
+        // of the factory contract
+        id = keccak256(abi.encodePacked(tx.origin));
+        owner = tx.origin;
     }
 
     function registerProduct(string memory _name, string[] memory _locations, uint256 _cost) public returns (bool) {

@@ -5,6 +5,8 @@ pragma experimental ABIEncoderV2;
 contract VendorManagement {
     address public owner;
     bytes32 public id;
+    bool public withdrawLock;
+
 
     struct Product {
         string name;
@@ -21,8 +23,6 @@ contract VendorManagement {
     event ProductLocationRemoved(string _name, string _location);
 
     function() external payable {
-        // convert unpayable address to payable
-        address(uint160(owner)).transfer(msg.value);
     }
 
     constructor() public {
@@ -31,6 +31,16 @@ contract VendorManagement {
         // of the factory contract
         id = keccak256(abi.encodePacked(tx.origin));
         owner = tx.origin;
+    }
+
+    function withdrawFunds() public returns (bool) {
+        require(onlyVendor(), "caller must be vendor");
+        require(address(this).balance > 0, "no balance in contract");
+        require(!withdrawLock, "contract must not be withdrawing");
+        withdrawLock = true;
+        msg.sender.transfer(address(this).balance);
+        withdrawLock = false;
+        return true;
     }
 
     function registerProduct(string memory _name, string[] memory _locations, uint256 _cost) public returns (bool) {

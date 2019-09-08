@@ -10,7 +10,9 @@ contract VendorManagement {
 
     struct Product {
         string name;
-        uint256 cost;
+     //   uint256 cost;
+     bytes32 costNote; // aztec note which contains the value of the product
+     // look into viewing keys ??
     }
  
     mapping(string => Product) public products;

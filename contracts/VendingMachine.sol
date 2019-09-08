@@ -35,6 +35,17 @@ contract VendingMachine {
         return true;
     }
 
+    // another input will be the aztec proof
+    // there will need to be 2 proofs:
+    // 1) proves that note being used for payment has same value as note on product (noteCost) [joinSplitProof]
+            // payment note isowned by user
+            // check noteCost note matches price (noteHash)
+            // ace.validateProof
+    // 2) take paymentNote and transfer
+            // payment note is transfered
+            // permission checks:
+            // check output note is owned by vendor
+    // product creation needs an aztec note associated with it
     function purchaseProduct(string memory _vendor, string memory _product) public payable returns (bool) {
         require(forSaleAtMachine(_vendor, _product), "product not for sale");
         VendorManagementI vmI = VendorManagementI(vendorNames[_vendor]);
@@ -42,6 +53,7 @@ contract VendingMachine {
         require(cost == msg.value, "incorrect payment amount");
         // convert unpayable address to payable
         address(uint160(vendorNames[_vendor])).transfer(msg.value);
+        // 
         emit ProductPurchased(_vendor, _product, now);
         return true;
     }
